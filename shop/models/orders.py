@@ -7,7 +7,7 @@ class Order(models.Model):
     STATUS_CHOICES = [('pending', 'Pending'), ('paid', 'Paid'),
                       ('shipped', 'Shipped')]
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+                             on_delete=models.CASCADE, related_name='orders')
     products = models.ManyToManyField(Product, through='OrderItem')
     total = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES,

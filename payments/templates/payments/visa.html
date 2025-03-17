@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Credit Card Payment{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Credit/Debit Card Payment</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" id="payment-form">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="card-number" class="form-label">Card Number</label>
+                        <input type="text" class="form-control" id="card-number" 
+                               name="card_number" placeholder="4242 4242 4242 4242" required>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="expiry-date" class="form-label">Expiry Date</label>
+                            <input type="text" class="form-control" id="expiry-date" 
+                                   name="expiry" placeholder="MM/YY" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cvv" class="form-label">CVV</label>
+                            <input type="text" class="form-control" id="cvv" 
+                                   name="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount (USD)</label>
+                        <input type="text" class="form-control" id="amount" 
+                               value="{{ request.session.amount }}" readonly>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Pay Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Format card number input
+    $('#card-number').on('input', function() {
+        this.value = this.value.replace(/\D/g, '').match(/.{1,4}/g)?.join(' ') || '';
+    });
+
+    // Format expiry date input
+    $('#expiry-date').on('input', function() {
+        this.value = this.value.replace(/\D/g, '').match(/.{1,2}/g)?.join('/') || '';
+    });
+});
+</script>
+{% endblock %}
+{% endblock %}

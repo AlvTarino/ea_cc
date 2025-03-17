@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Failed{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h2 class="mb-0"><i class="bi bi-x-circle-fill"></i> Payment Failed</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">We couldn't process your payment.</p>
+                <p>Reason: {{ error_message }}</p>
+                <div class="mt-4">
+                    <a href="{% url 'payments:visa_payment' %}" class="btn btn-primary">
+                        Try Again
+                    </a>
+                    <a href="{% url 'shop:product_list' %}" class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

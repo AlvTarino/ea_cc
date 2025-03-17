@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>{{ user.username }}'s Profile</h2>
+        <dl class="row">
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">{{ user.email }}</dd>
+            
+            <dt class="col-sm-3">Phone</dt>
+            <dd class="col-sm-9">{{ user.phone|default:"Not provided" }}</dd>
+            
+            <dt class="col-sm-3">Shipping Address</dt>
+            <dd class="col-sm-9">{{ user.shipping_address|default:"Not provided"|linebreaks }}</dd>
+        </dl>
+        <a href="{% url 'users:profile_edit' %}" class="btn btn-primary">Edit Profile</a>
+    </div>
+</div>
+{% endblock %}
