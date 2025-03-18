@@ -21,7 +21,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
     ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+# AUTH_USER_MODEL = 'users.CustomUser'
 
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
