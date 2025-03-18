@@ -34,6 +34,8 @@ class LoginView(FormView):
     success_url = reverse_lazy('shop:product_list')
 
     def form_valid(self, form):
+        user = form.get_user()
+        print(f"Logging in user: {user}, is_active: {user.is_active}")
         login(self.request, form.get_user())
         remember_me = form.cleaned_data.get('remember_me')
         if not remember_me:

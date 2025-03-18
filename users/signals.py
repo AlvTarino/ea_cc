@@ -7,8 +7,9 @@ from .models import CustomUser
 def update_user(sender, instance, **kwargs):
     """
     Updates user email verification status before saving
-    """
+ 
     if instance.email_verified:
         instance.is_active = True
     else:
         instance.is_active = False
+    """

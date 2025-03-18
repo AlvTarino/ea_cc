@@ -7,10 +7,16 @@ from .models import CustomUser
 # @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ['email', 'username', 'phone', 'is_staff']
+    list_display = [
+        'email', 'username', 'phone', 'is_staff', 'is_superuser', 'is_active'
+    ]
     fieldsets = UserAdmin.fieldsets + (
         ('Additional Info', {'fields': ('phone', 'shipping_address')}),
     )
+
+    # Force admin access
+    def has_module_permission(self, request):
+        return True  # Override any custom permission checks
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

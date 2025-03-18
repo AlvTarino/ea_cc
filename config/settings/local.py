@@ -15,6 +15,8 @@ INSTALLED_APPS += [
 MIDDLEWARE += [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+MIDDLEWARE.remove('django.middleware.csrf.CsrfViewMiddleware')
+
 
 # Debug Toolbar
 INTERNAL_IPS = [
@@ -38,3 +40,10 @@ DATABASES['default']['TEST'] = {
 
 # Static files
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+if DEBUG:
+    import socket
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS = [
+        ip[: ip.rfind(".")] + ".1" for ip in ips
+    ] + ["127.0.0.1", "10.0.2.2"]

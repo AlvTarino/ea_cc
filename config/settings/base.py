@@ -92,6 +92,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'users.auth_backends.EmailAuthBackend',  # Custom backend for email login
+    'django.contrib.auth.backends.ModelBackend',  # Default Django backend
+]
+
+
 # ROOT_URLCONF = 'config.urls'   # Should already be present
 # WSGI_APPLICATION = 'config.wsgi.application'  # Verify this exists
 
@@ -136,6 +142,11 @@ CELERY_TIMEZONE = 'Africa/Nairobi'
 CELERY_TASK_ALWAYS_EAGER = False
 CELERY_TASK_EAGER_PROPAGATES = False
 CELERY_TASK_IGNORE_RESULT = True
+
+# base.py
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_NAME = "eastafricom_session"
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
 
 
 # Payment Gateways
